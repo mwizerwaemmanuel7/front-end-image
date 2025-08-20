@@ -21,7 +21,7 @@ function AdminUpload({ onUpload }) {
       formData.append('link', link);
       formData.append('categories', categories);
 
-      await axios.post('http://localhost:5000/api/images/upload', formData, {
+      await axios.post('https://back-end-image1.onrender.com/api/images/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
