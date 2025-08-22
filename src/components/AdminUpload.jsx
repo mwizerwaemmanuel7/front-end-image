@@ -8,6 +8,10 @@ function AdminUpload({ onUpload }) {
   const [categories, setCategories] = useState('');
   const [message, setMessage] = useState('');
 
+  // Cloudinary config
+  const cloudName = 'dtombscjt'; // your Cloudinary cloud name
+  const uploadPreset = 'unsigned_preset'; // your unsigned upload preset
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file || !description || !link || !categories) {
@@ -15,14 +19,24 @@ function AdminUpload({ onUpload }) {
       return;
     }
     try {
+      // 1. Upload image to Cloudinary
       const formData = new FormData();
-      formData.append('image', file);
-      formData.append('description', description);
-      formData.append('link', link);
-      formData.append('categories', categories);
+      formData.append('file', file);
+      formData.append('upload_preset', uploadPreset);
 
-      await axios.post('https://back-end-image.onrender.com/api/images/upload', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
+      const cloudinaryRes = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        formData
+      );
+
+      const imageUrl = cloudinaryRes.data.secure_url;
+
+      // 2. Save image info to your backend
+      await axios.post('https://back-end-image.onrender.com/api/images', {
+        imageUrl,
+        description,
+        link,
+        categories: categories.split(',').map(cat => cat.trim())
       });
 
       setMessage('Image uploaded!');
