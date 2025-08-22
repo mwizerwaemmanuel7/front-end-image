@@ -17,7 +17,7 @@ function App() {
 
   // Fetch images from backend
   const fetchImages = () => {
-    axios.get('https://back-end-image1.onrender.com/api/images')
+    axios.get('https://back-end-image.onrender.com/api/images')
       .then(res => setImages(res.data))
       .catch(err => console.error(err));
   };
@@ -60,7 +60,7 @@ function App() {
   // Handle delete
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this image?")) {
-      await axios.delete(`https://back-end-image1.onrender.com/api/images/${id}`);
+      await axios.delete(`https://back-end-image.onrender.com/api/images/${id}`);
       fetchImages();
     }
   };
