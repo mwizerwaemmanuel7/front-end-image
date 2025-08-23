@@ -4,7 +4,7 @@ import ImageCard from './ImageCard';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom'; // <-- Import Link
 
-const IMAGES_PER_PAGE = 2;
+const IMAGES_PER_PAGE = 8;
 
 function GalleryPage() {
   const [images, setImages] = useState([]);
