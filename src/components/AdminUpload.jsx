@@ -6,6 +6,7 @@ function AdminUpload({ onUpload }) {
   const [description, setDescription] = useState('');
   const [link, setLink] = useState('');
   const [categories, setCategories] = useState('');
+  const [paragraph, setParagraph] = useState(''); // <-- New state
   const [message, setMessage] = useState('');
 
   // Cloudinary config
@@ -36,7 +37,8 @@ function AdminUpload({ onUpload }) {
         imageUrl,
         description,
         link,
-        categories: categories.split(',').map(cat => cat.trim())
+        categories: categories.split(',').map(cat => cat.trim()),
+        paragraph // <-- Send paragraph to backend
       });
 
       setMessage('Image uploaded!');
@@ -44,6 +46,7 @@ function AdminUpload({ onUpload }) {
       setDescription('');
       setLink('');
       setCategories('');
+      setParagraph(''); // <-- Reset paragraph
       if (onUpload) onUpload();
     } catch (err) {
       setMessage('Upload failed.');
@@ -79,6 +82,12 @@ function AdminUpload({ onUpload }) {
           placeholder="Categories (comma separated)"
           value={categories}
           onChange={e => setCategories(e.target.value)}
+          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
+        />
+        <textarea
+          placeholder="Short paragraph"
+          value={paragraph}
+          onChange={e => setParagraph(e.target.value)}
           style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
         />
         <button type="submit" style={{ padding: "10px 20px" }}>Upload</button>

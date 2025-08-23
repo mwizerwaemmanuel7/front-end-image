@@ -7,7 +7,7 @@ function AdminPage() {
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem('isAdmin') === 'true');
   const [images, setImages] = useState([]);
   const [editing, setEditing] = useState(null); // The image being edited
-  const [editFields, setEditFields] = useState({ description: '', link: '', categories: '' });
+  const [editFields, setEditFields] = useState({ description: '', link: '', categories: '', paragraph: '' });
 
   // Fetch images
   const fetchImages = () => {
@@ -31,7 +31,8 @@ function AdminPage() {
     setEditFields({
       description: img.description,
       link: img.link,
-      categories: img.categories.join(', ')
+      categories: img.categories.join(', '),
+      paragraph: img.paragraph || '' // <-- Add this
     });
   };
 
@@ -41,7 +42,8 @@ function AdminPage() {
       imageUrl: img.imageUrl,
       description: editFields.description,
       link: editFields.link,
-      categories: editFields.categories.split(',').map(c => c.trim())
+      categories: editFields.categories.split(',').map(c => c.trim()),
+      paragraph: editFields.paragraph // <-- Add this
     });
     setEditing(null);
     fetchImages();
@@ -89,6 +91,12 @@ function AdminPage() {
                   onChange={e => setEditFields({ ...editFields, categories: e.target.value })}
                   placeholder="Categories (comma separated)"
                 />
+                <textarea
+                  placeholder="Short paragraph"
+                  value={editFields.paragraph}
+                  onChange={e => setEditFields({ ...editFields, paragraph: e.target.value })}
+                  style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
+                />
                 <button onClick={() => saveEdit(img)}>Save</button>
                 <button onClick={() => setEditing(null)}>Cancel</button>
               </div>
@@ -97,6 +105,7 @@ function AdminPage() {
                 <p>{img.description}</p>
                 <a href={img.link} target="_blank" rel="noopener noreferrer">Go to link</a>
                 <p>Categories: {img.categories.join(', ')}</p>
+                <p>{img.paragraph}</p>
                 <button onClick={() => startEdit(img)}>Edit</button>
                 <button onClick={() => handleDelete(img._id)} style={{ color: "red" }}>Delete</button>
               </div>

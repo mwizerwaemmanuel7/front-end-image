@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ImageCard from './ImageCard';
 import SearchBar from './SearchBar';
+import { Link } from 'react-router-dom'; // <-- Import Link
 
 const IMAGES_PER_PAGE = 2;
 
@@ -61,12 +62,17 @@ function GalleryPage() {
           <p>No images found.</p>
         ) : (
           paginatedImages.map((img, idx) => (
-            <ImageCard
+            <Link
+              to={`/image/${img._id}`}
               key={img._id || idx}
-              imageUrl={img.imageUrl}
-              description={img.description}
-              link={img.link}
-            />
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <ImageCard
+                imageUrl={img.imageUrl}
+                description={img.description}
+                link={img.link}
+              />
+            </Link>
           ))
         )}
       </div>
