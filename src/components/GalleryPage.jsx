@@ -36,7 +36,7 @@ function GalleryPage() {
 
   return (
     <div>
-      <h1>Image Gallery</h1>
+      <h1>Katandika Movie Base</h1>
       <div style={{ marginBottom: "20px", marginLeft: "20px" }}>
         {allCategories.map(category => (
           <button
