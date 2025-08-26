@@ -40,17 +40,27 @@ function GalleryPage() {
       <div style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "flex-start", // <-- Move to the left
+        justifyContent: "flex-start",
         marginTop: "30px",
         marginBottom: "20px",
-        paddingLeft: "40px" // <-- Optional: adds space from the left edge
+        paddingLeft: "40px"
       }}>
         <img
           src={logo}
           alt="Katandika Movie Base Logo"
           style={{ height: "60px", marginRight: "20px" }}
         />
-        <h1 style={{ margin: 0, fontSize: "2.5rem" }}>Katandika Movie Base</h1>
+        <h1
+          style={{
+            margin: 0,
+            fontSize: "1.5rem", // smaller size
+            fontFamily: "'Montserrat', Arial, sans-serif", // custom font style
+            fontWeight: 700,
+            letterSpacing: "1px"
+          }}
+        >
+          Katandika Movie Base
+        </h1>
       </div>
       <div style={{ marginBottom: "20px", marginLeft: "20px" }}>
         {allCategories.map(category => (
