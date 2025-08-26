@@ -40,10 +40,10 @@ function GalleryPage() {
       <div style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "flex-end", // <-- Move to the right
+        justifyContent: "flex-start", // <-- Move to the left
         marginTop: "30px",
         marginBottom: "20px",
-        paddingRight: "40px" // <-- Optional: adds space from the right edge
+        paddingLeft: "40px" // <-- Optional: adds space from the left edge
       }}>
         <img
           src={logo}
