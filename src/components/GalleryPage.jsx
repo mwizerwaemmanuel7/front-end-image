@@ -3,7 +3,7 @@ import axios from 'axios';
 import ImageCard from './ImageCard';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png'; // <-- Import your logo
+import logo from '../assets/logo.png';
 
 const IMAGES_PER_PAGE = 8;
 
@@ -37,12 +37,20 @@ function GalleryPage() {
 
   return (
     <div>
-      <img
-        src={logo}
-        alt="Katandika Movie Base Logo"
-        style={{ height: "80px", display: "block", margin: "0 auto" }}
-      />
-      <h1 style={{ textAlign: "center" }}>Katandika Movie Base</h1>
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "30px",
+        marginBottom: "20px"
+      }}>
+        <img
+          src={logo}
+          alt="Katandika Movie Base Logo"
+          style={{ height: "60px", marginRight: "20px" }}
+        />
+        <h1 style={{ margin: 0, fontSize: "2.5rem" }}>Katandika Movie Base</h1>
+      </div>
       <div style={{ marginBottom: "20px", marginLeft: "20px" }}>
         {allCategories.map(category => (
           <button
