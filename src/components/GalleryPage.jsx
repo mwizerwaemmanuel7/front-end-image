@@ -14,7 +14,7 @@ function GalleryPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    axios.get('https://back-end-image.onrender.com/api/images')
+    axios.get('https://abroadscholar.icu/api/images')
       .then(res => setImages(res.data))
       .catch(err => console.error(err));
   }, []);

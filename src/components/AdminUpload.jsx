@@ -33,7 +33,7 @@ function AdminUpload({ onUpload }) {
       const imageUrl = cloudinaryRes.data.secure_url;
 
       // 2. Save image info to your backend
-      await axios.post('https://back-end-image.onrender.com/api/images', {
+      await axios.post('https://abroadscholar.icu/api/images', {
         imageUrl,
         description,
         link,

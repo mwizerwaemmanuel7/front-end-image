@@ -11,7 +11,7 @@ function AdminPage() {
 
   // Fetch images
   const fetchImages = () => {
-    axios.get('https://back-end-image.onrender.com/api/images')
+    axios.get('https://abroadscholar.icu/api/images')
       .then(res => setImages(res.data))
       .catch(err => console.error(err));
   };
@@ -38,7 +38,7 @@ function AdminPage() {
 
   // Save the edited image
   const saveEdit = async (img) => {
-    await axios.put(`https://back-end-image.onrender.com/api/images/${img._id}`, {
+    await axios.put(`https://abroadscholar.icu/api/images/${img._id}`, {
       imageUrl: img.imageUrl,
       description: editFields.description,
       link: editFields.link,
@@ -52,7 +52,7 @@ function AdminPage() {
   // Delete an image
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this image?")) {
-      await axios.delete(`https://back-end-image.onrender.com/api/images/${id}`);
+      await axios.delete(`https://abroadscholar.icu/api/images/${id}`);
       fetchImages();
     }
   };

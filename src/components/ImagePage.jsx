@@ -7,7 +7,7 @@ function ImagePage() {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
-    axios.get(`https://back-end-image.onrender.com/api/images/${id}`)
+    axios.get(`https://abroadscholar.icu/api/images/${id}`)
       .then(res => setImage(res.data))
       .catch(err => setImage(null));
   }, [id]);
