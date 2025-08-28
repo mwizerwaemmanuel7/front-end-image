@@ -23,7 +23,8 @@ function AdminUpload({ onUpload }) {
       formData.append('categories', categories);
       formData.append('paragraph', paragraph);
 
-      await axios.post('https://abroadscholar.icu/upload', formData, {
+      // Use the correct backend route!
+      await axios.post('https://abroadscholar.icu/api/images/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
