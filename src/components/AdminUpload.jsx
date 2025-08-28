@@ -6,12 +6,8 @@ function AdminUpload({ onUpload }) {
   const [description, setDescription] = useState('');
   const [link, setLink] = useState('');
   const [categories, setCategories] = useState('');
-  const [paragraph, setParagraph] = useState(''); // <-- New state
+  const [paragraph, setParagraph] = useState('');
   const [message, setMessage] = useState('');
-
-  // Cloudinary config
-  const cloudName = 'dtombscjt'; // your Cloudinary cloud name
-  const uploadPreset = 'unsigned_preset'; // your unsigned upload preset
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,25 +16,15 @@ function AdminUpload({ onUpload }) {
       return;
     }
     try {
-      // 1. Upload image to Cloudinary
       const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', uploadPreset);
+      formData.append('image', file); // 'image' must match your backend Multer setup
+      formData.append('description', description);
+      formData.append('link', link);
+      formData.append('categories', categories);
+      formData.append('paragraph', paragraph);
 
-      const cloudinaryRes = await axios.post(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        formData
-      );
-
-      const imageUrl = cloudinaryRes.data.secure_url;
-
-      // 2. Save image info to your backend
-      await axios.post('https://abroadscholar.icu/api/images', {
-        imageUrl,
-        description,
-        link,
-        categories: categories.split(',').map(cat => cat.trim()),
-        paragraph // <-- Send paragraph to backend
+      await axios.post('https://abroadscholar.icu/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
       });
 
       setMessage('Image uploaded!');
@@ -46,7 +32,7 @@ function AdminUpload({ onUpload }) {
       setDescription('');
       setLink('');
       setCategories('');
-      setParagraph(''); // <-- Reset paragraph
+      setParagraph('');
       if (onUpload) onUpload();
     } catch (err) {
       setMessage('Upload failed.');
